@@ -1,12 +1,3 @@
-/*
- * Starter Project for Messenger Platform Quick Start Tutorial
- *
- * Remix this as the starting point for following the Messenger Platform
- * quick start tutorial.
- *
- * https://developers.facebook.com/docs/messenger-platform/getting-started/quick-start/
- *
- */
 'use strict';
 const PAGE_ACCESS_TOKEN = "EAAR6yzgZBNCcBAIp8kvUfHdGqumB1j8mzJkTuPxjDwXfv5ChtsD5ZB1sZBfcfyPs0WwthslEhQDhloBNaZA4zSC28ZCuDtp8XKKFZBKWP86gYSVYUtBc4ZBPRBZAdiSHdzCCx9RanrC4v15C31pb5sEppFZBZBPVWD105ObsEEKs7uWei0FZCFnXuRp";
 const ps = require('python-shell');
@@ -60,15 +51,6 @@ app.use('/board1', require('./routes/board1'));
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 app.use(express.static(path.join(__dirname, './public')));
-/*app.get('/', function(req, res) {
-    res.writeHead(200,{'Content-Type':'text/html'});
-      fs.readFile(__dirname + '/testpage.html', (err, data) => {
-        if (err) {
-          return console.error(err);
-        }
-        res.end(data, 'utf-8');
-      });
-});*/
 app.get('/',function(req, res, next) {
    res.redirect('/board1/');
 });
@@ -177,21 +159,6 @@ function handlePostback(sender_psid, received_postback) {
             menu(sender_psid);
 		},1000);
 	}
-    // Set the response based on the postback payload
-    /*if (message_payload === "123123") {
-			response = {
-				"text": "문의하실 질문의 키워드를 입력해주세요."
-        }
-		//back2fst(sender_psid)
-    }	else if (payload === "BACK_PAYLOAD") {
-		menu(sender_psid)
-	}*/
-     
-
-    // Send the message to acknowledge the postback
-    //setTimeout(function() {
-      //      callSendAPI(sender_psid, response);
-        //}, 10);
 };
 	var last = "";
 	var first = "";
