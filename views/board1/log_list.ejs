@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+ 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>챗봇 관리페이지</title>
+<style>
+<%- include ./css/bootstrap.css%>
+.container{max-width:1170px; margin:auto;}
+</style>
+</head>
+
+<%
+var curSet = pasing.curSet
+var endPage = pasing.endPage
+var startPage = pasing.startPage
+var totalSet = pasing.totalSet
+var totalPage = pasing.totalPage
+var page_list_size = pasing.page_list_size
+var page_size = pasing.page_size
+var curPage = pasing.curPage
+var no = pasing.no
+var totalPageCount = pasing.totalPageCount
+%>
+
+<ul class="nav nav-tabs container">
+	<img src = "/images/image.png" style = "margin-left : 10px ;margin-right : 10px ;padding-bottom : 8px; padding-top :8px ;width : 120px ; height : 40px" alt = "logo"/>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Q&A</a>
+	 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		  <a class="dropdown-item" href="/board1/list/1">전체</a>
+		  <a class="dropdown-item" href="/board1/list-1/1">전표/장부관리</a>
+		  <a class="dropdown-item" href="/board1/list-2/1">자동전표처리</a>
+		  <a class="dropdown-item" href="/board1/list-3/1">부가가치세</a>
+		  <a class="dropdown-item" href="#">결산/재무제표</a> 
+		  <a class="dropdown-item" href="#">원천징수/급여관리</a>
+		  <a class="dropdown-item" href="#">연말정산</a>
+		  <a class="dropdown-item" href="#">법인조정</a>		
+		  <a class="dropdown-item" href="#">개인조정</a>			
+		  <a class="dropdown-item" href="#">물류관리</a>
+		  <a class="dropdown-item" href="#">마감후이월</a>
+		  <a class="dropdown-item" href="#">시스템</a>
+		  <a class="dropdown-item" href="#">퇴직/사업/기타/보험</a>
+
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">추가리스트</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="/board1/list2/1">대화이력</a>
+  </li>
+  <li class="nav-item"> 
+    <a class="nav-link disabled" href="#">Disabled</a>
+  </li>
+ <form class = "form-inline ml-auto" action="/board1/logout" method = "post">
+	<button class = "btn btn-success btn-sm" style = "border-color :#bcc6e5 ;background-color: #ffffff; color : #000000"type = "submit ">로그아웃</button>
+ </form>
+</ul>
+    <div class = "container" >             
+    <table class = "table table-bordered" style="width:100%">
+        <!--<colgroup>
+            <col width='8%' />
+            <col width='*%' />
+            <col width='15%' />
+            <col width='15%' />
+        </colgroup>-->
+        <thead class ="thead-dark">
+            <tr>
+                <th style="width : 50px">번호</th>
+				<th style="width : 150px">고객명</th>
+                <th style="width : 100px">관리</th>
+            </tr>
+        </thead>
+        <tbody>
+        <%
+             for(var i=no; i<no+page_size; i++) {
+				if (i == totalPageCount){
+					break;
+				}
+        %>
+            <tr>
+                <td style = "text-align: center"><%=i+1%></td>
+				<td style = "text-align: center"><a href='/board1/log_read?Poster=<%=rows[totalPageCount-1-i].Poster%>'><%=rows[totalPageCount-1-i].Poster%></a></td>
+                <td style = "text-align: center">admin</td>
+            </tr>
+        <%
+             }
+        %>
+        </tbody>
+    </table>
+	<a class = "btn btn-dark " style="float: right" href="/board1/form">글쓰기</a>
+	<div class = "text-center">
+		<ul class = "pagination justify-content-center">
+			<%
+			if(curPage > 1){
+			%>
+			<li value=(curPage -1) class="page-item">
+				<a class = "page-link" href='../list/<%= 1 %>'>첫페이지</a>
+			</li>
+			<%
+			}else{
+			%>
+			<li value=(curPage -1) class="page-item disabled">
+				<a class = "page-link" href='#'>첫페이지</a>
+			</li>
+			<%
+			}
+			%>
+		
+			<%
+			if(startPage > 1){
+			%>
+			<li value=(curPage -1) class="page-item">
+				<a class = "page-link" href='../list/<%= startPage-1 %>'><</a>
+			</li>
+			<%
+			}else{
+			%>
+			<li value=(curPage -1) class="page-item disabled">
+				<a class = "page-link" href='#'><</a>
+			</li>
+			<%
+			}
+			%>
+			
+			
+			<%
+				for(var i = startPage; i <= totalPage; i++){
+				
+				if(i == curPage){
+			%>
+			<li value=<%= i %> class = "page-item active "><a class = "page-link" href="../list/<%= i %>"><%= i %></a></li>
+			<%
+				}else{
+			%>
+
+			<li value=<%= i %> class='page-item ' >
+			<a class ="page-link" href='../list/<%= i %>'>
+			<%= i %>
+			</a>
+			</li>
+
+
+			<%
+			}
+			%>
+
+			<%
+			}
+			%>
+			<%
+			if(endPage < totalPage){
+			%>
+			<li value=( curPage + 1) class="page-item">
+			<a class = "page-link" href='../list/<%= (endPage*1 + 1) %>'>></a>
+			</li>
+			<%
+			}else{
+			%>
+			<li value=(curPage -1) class="page-item disabled">
+			<a class = "page-link" href='#'>></a>
+			</li>
+			<%
+			}
+			%>
+			
+			<%
+			if(curPage < totalPage){
+			%>
+			<li value=( curPage + 1) class="page-item">
+			<a class = "page-link" href='../list/<%= totalPage %>'>끝페이지</a>
+			</li>
+			<%
+			}else{
+			%>
+			<li value=(curPage -1) class="page-item disabled">
+			<a class = "page-link" href='#'>끝페이지</a>
+			</li>
+			<%
+			}
+			%>
+
+
+		</ul>
+	</div>
+</div>
+</ul>
+</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</body>
+</html>

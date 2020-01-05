@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>챗봇 관리페이지</title>
+<style>
+<%- include ./css/bootstrap.css%>
+</style>
+
+</head>
+<body>
+<ul class="nav nav-tabs container">
+	<img src = "/images/image.png" style = "margin-left : 10px ;margin-right : 10px ;padding-bottom : 8px; padding-top :8px ;width : 120px ; height : 40px" alt = "logo"/>
+  <li class="nav-item dropdown">
+	<% if (num == 1){%>
+    <a class="nav-link dropdown-toggle active" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="/board1">Q&A</a>
+	<%}else{%>
+	<a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="/board1">Q&A</a>
+	<%}%>
+	 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		  <a class="dropdown-item" href="/board1/list/1">전체</a>
+		  <a class="dropdown-item" href="/board1/list-1/1">전표/장부관리</a>
+		  <a class="dropdown-item" href="/board1/list-2/1">자동전표처리</a>
+		  <a class="dropdown-item" href="/board1/list-3/1">부가가치세</a>
+		  <a class="dropdown-item" href="#">결산/재무제표</a> 
+		  <a class="dropdown-item" href="#">원천징수/급여관리</a>
+		  <a class="dropdown-item" href="#">연말정산</a>
+		  <a class="dropdown-item" href="#">법인조정</a>		
+		  <a class="dropdown-item" href="#">개인조정</a>			
+		  <a class="dropdown-item" href="#">물류관리</a>
+		  <a class="dropdown-item" href="#">마감후이월</a>
+		  <a class="dropdown-item" href="#">시스템</a>
+		  <a class="dropdown-item" href="#">퇴직/사업/기타/보험</a>
+		  <a class="dropdown-item" href="#">미분류</a>
+        </div>
+  </li>
+  <li class="nav-item">
+  <% if (num == 1){%>
+    <a class="nav-link" href="/board1/list2/1">추가리스트</a>
+	<%}else{%>
+	<a class="nav-link active" href="/board1/list2/1">추가리스트</a>
+	<%}%>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/board1/log_list">대화이력</a>
+  </li>
+  <li class="nav-item"> 
+    <a class="nav-link disabled" href="#">Disabled</a>
+  </li>
+ <form class = "form-inline ml-auto" action="/board1/logout" method = "post">
+	<button class = "btn btn-success btn-sm" style = "border-color :#05728f ;background-color: #ffffff; color : #000000"type = "submit ">로그아웃</button>
+ </form>
+</ul>
+
+<div class="container" style = "margin-top:0px">
+	<% if(num == 1){%>
+    <form name="form1" action="/board1/save" method="post">
+	<%}else{%>
+	<form name="form1" action="/board1/save1" method="post">
+	<%}%>
+        <table border="1" style ="text-align : center" style="width:400" class = "table table-bordered">
+            <colgroup>
+                <col width='15%' />
+                <col width='*%' />
+            </colgroup>
+			<thead class ="thead-dark">
+						<tr>
+							<th colspan="3"	
+								style="text-align: center;font-weight: 200">글 작성 </th>
+						</tr>
+					</thead>
+            <tbody>
+                <tr>
+                    <td style = "text-align :center">작성자</td>
+                    <td><input type="text" value = " Admin" readonly style= "width : 600px" name="brdwriter" size="20" maxlength="20" value="admin"></td>
+                </tr>
+				<tr>
+                    <td style = "text-align :center">카테고리</td>
+					<td align="left"><select name="category" style="margin-left:136px;width:200px;">
+					<%for(var i=0; i<category.length; i++){
+					if(category[i]==row.Category){
+					%>
+					<option value=<%=category[i]%> selected="selected"><%=category[i]%></option>
+					<%}else{%>
+					<option value=<%=category[i]%>><%=category[i]%></option>
+					<%}}%>
+					
+					</select></td>
+                    <!--<td><input type="text" style= "width : 600px" name="category" size="20" maxlength="20" value="<%=row.Category%>"></td>-->
+                </tr>
+				<tr>
+                    <td style = "text-align :center">제목</td>
+                    <td><input type="text" style= "width : 600px" name="title" size="20" maxlength="20" value="<%=row.Title%>"></td>
+                </tr>
+                <tr>
+                    <td style = "text-align :center">질문 내용</td>
+                    <td><input type="text" style= "width : 600px"name="q_raw" size="70" maxlength="250" value="<%=row.Q_raw%>"></td>
+                </tr>
+                <tr style="height: 200px">
+                    <td style = "vertical-align:middle">답변 내용</td>
+                    <td><textarea name="answer" style = "height :200px; width:600px" rows="5"><%=row.Answer%></textarea></td>
+                </tr>
+            </tbody>
+        </table> 
+		<button type ="submit" style ="float:right"class = "btn btn-dark navbar-right">저장</button>
+        <input name="brdno" value="<%=row.BRDNO%>" type="hidden">
+    <form>
+</div>
+	<script stc="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script type = "text/javascript" src = "js/bootstrap.js"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+ 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>챗봇 관리페이지</title>
+<style>
+<%- include ./css/bootstrap.css%>
+</style>
+</head>
+<ul class="nav nav-tabs container">
+	<img src = "/images/image.png" style = "margin-left : 10px ;margin-right : 10px ;padding-bottom : 8px; padding-top :8px ;width : 120px ; height : 40px" alt = "logo"/>
+  <li class="nav-item dropdown">
+   <% if (num == 1){%>
+    <a class="nav-link dropdown-toggle active" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="/board1">Q&A</a>
+	<%}else{%>
+	<a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="/board1">Q&A</a>
+	<%}%>
+	 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		  <a class="dropdown-item" href="/board1/list/1">전체</a>
+		  <a class="dropdown-item" href="/board1/list-1/1">전표/장부관리</a>
+		  <a class="dropdown-item" href="/board1/list-2/1">자동전표처리</a>
+		  <a class="dropdown-item" href="/board1/list-3/1">부가가치세</a>
+		  <a class="dropdown-item" href="#">결산/재무제표</a> 
+		  <a class="dropdown-item" href="#">원천징수/급여관리</a>
+		  <a class="dropdown-item" href="#">연말정산</a>
+		  <a class="dropdown-item" href="#">법인조정</a>		
+		  <a class="dropdown-item" href="#">개인조정</a>			
+		  <a class="dropdown-item" href="#">물류관리</a>
+		  <a class="dropdown-item" href="#">마감후이월</a>
+		  <a class="dropdown-item" href="#">시스템</a>
+		  <a class="dropdown-item" href="#">미분류</a>
+        </div>
+  </li>
+  <li class="nav-item">
+    <% if (num == 1){%>
+    <a class="nav-link" href="/board1/list2/1">추가리스트</a>
+	<%}else{%>
+	<a class="nav-link active" href="/board1/list2/1">추가리스트</a>
+	<%}%>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/board1/log_list">대화이력</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#">Disabled</a>
+  </li>
+ <form class = "form-inline ml-auto" action="">
+	<button class = "btn btn-success btn-sm" style = "border-color :#05728f ;background-color: #ffffff; color : #000000" type = "submit ">로그아웃</button>
+ </form>
+</ul>
+
+ <div class="container">
+		<div class="row">
+				<table class="table table-bordered" style="text-align: center; border: 1px solid #dddddd ;width:1200px;">
+					<thead class ="thead-dark">
+						<tr>
+							<th colspan="3"	
+								style="text-align: center;font-weight: 200">글 보기 </th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>작성자</td>	
+							<td colspan="2">admin</td>
+						</tr>
+						<tr>
+							<td>카테고리</td>	
+							<td colspan="2"><%=row.Category %></td>
+						</tr>
+						<tr>
+							<td style="width: 20%;"> 제목 </td>
+							<td colspan="2"><%=row.Title %></td>
+						</tr>
+						<tr style = "height : 100px">
+							<td style="width: 20%;vertical-align:middle"> 질문 내용 </td>
+							<td colspan="2" style="text-align: center; vertical-align:middle;padding:20px 20px 20px 20px"><%=row.Q_raw%></td>
+						</tr>
+						<tr style="height: 200px">
+							<td style = "vertical-align:middle">답변 내용</td>	
+							<td colspan="3" style="text-align: center; vertical-align:middle;padding:20px 20px 20px 20px"><%=row.Answer %></td>
+						</tr>
+					</tbody>
+				</table>
+		</div>
+		<ul class="nav justify-content-end">
+				<li class="nav-item">
+					<a href = "#" onclick="history.back(-1)" class="btn btn-light">뒤로가기</a>
+				</li><li class="nav-item">
+				<%if (num == 1){%>
+					<a href="/board1/delete?brdno=<%=row.BRDNO%>" class="btn btn-light">삭제</a>
+					</li><li class="nav-item">
+					<a href="/board1/form?brdno=<%=row.BRDNO%>" class="btn btn-light">수정</a>
+				</li></ul>
+				<%}else{%>
+					<a href="/board1/delete1?brdno=<%=row.BRDNO%>" class="btn btn-light">삭제</a>
+					</li><li class="nav-item">
+					<a href="/board1/form1?brdno=<%=row.BRDNO%>" class="btn btn-light">답변등록</a>
+				</li></ul>
+				<%}%>
+	</div>
+	
+</body>
+</html>

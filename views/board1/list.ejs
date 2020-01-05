@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+ 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>챗봇 관리페이지</title>
+<style>
+<%- include ./css/bootstrap.css%>
+</style>
+</head>
+
+<%
+var curSet = pasing.curSet
+var endPage = pasing.endPage
+var startPage = pasing.startPage
+var totalSet = pasing.totalSet
+var totalPage = pasing.totalPage
+var page_list_size = pasing.page_list_size
+var page_size = pasing.page_size
+var curPage = pasing.curPage
+var no = pasing.no
+var totalPageCount = pasing.totalPageCount
+%>
+
+<ul class="nav nav-tabs container">
+	<img src = "/images/image.png" style = "margin-left : 10px ;margin-right : 10px ;padding-bottom : 8px; padding-top :8px ;width : 120px ; height : 40px" alt = "logo"/>
+  <li class="nav-item dropdown">
+	<% if (num == 1){%>
+    <a class="nav-link dropdown-toggle active" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Q&A</a>
+	<%}else{%>
+	<a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="/board1">Q&A</a>
+	<%}%>
+	 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		<% if (menu == 0){%>
+          <a class="dropdown-item active" href="/board1/list-0/1">전체</a>
+		  <%}else{%>
+		  <a class="dropdown-item" href="/board1/list-0/1">전체</a>
+		  <%}%>
+		  
+		  <% if (menu == 1){%>
+          <a class="dropdown-item active" href="/board1/list-1/1">전표/장부관리</a>
+		  <%}else{%>
+		  <a class="dropdown-item" href="/board1/list-1/1">전표/장부관리</a>
+		  <%}%>
+		  
+		  <% if (menu == 2){%>
+          <a class="dropdown-item active" href="/board1/list-2/1">자동전표처리</a>
+		  <%}else{%>
+		  <a class="dropdown-item" href="/board1/list-2/1">자동전표처리</a>
+		  <%}%>
+		  
+		  <% if (menu == 3){%>
+          <a class="dropdown-item active" href="/board1/list-3/1">부가가치세</a>
+		  <%}else{%>
+		  <a class="dropdown-item" href="/board1/list-3/1">부가가치세</a>
+		  <%}%>
+		  
+		  <% if (menu == 4){%>
+          <a class="dropdown-item active" href="/board1/list-4/1">결산/재무제표</a>
+		  <%}else{%>
+		  <a class="dropdown-item" href="/board1/list-4/1">결산/재무제표</a>
+		  <%}%>
+		  
+		  <% if (menu == 5){%>
+          <a class="dropdown-item active" href="/board1/list-5/1">원천징수/급여관리</a>
+		  <%}else{%>
+		  <a class="dropdown-item" href="/board1/list-5/1">원천징수/급여관리</a>
+		  <%}%>
+		  
+		  <% if (menu == 6){%>
+          <a class="dropdown-item active" href="/board1/list-6/1">연말정산</a>
+		  <%}else{%>
+		  <a class="dropdown-item" href="/board1/list-6/1">연말정산</a>
+		  <%}%>
+		  
+		  <% if (menu == 7){%>
+          <a class="dropdown-item active" href="/board1/list-7/1">법인조정</a>
+		  <%}else{%>
+		  <a class="dropdown-item" href="/board1/list-7/1">법인조정</a>
+		  <%}%>
+		  
+		  <% if (menu == 8){%>
+          <a class="dropdown-item active" href="/board1/list-8/1">개인조정</a>
+		  <%}else{%>
+		  <a class="dropdown-item" href="/board1/list-8/1">개인조정</a>
+		  <%}%>
+		  
+		  <% if (menu == 9){%>
+          <a class="dropdown-item active" href="/board1/list-9/1">물류관리</a>
+		  <%}else{%>
+		  <a class="dropdown-item" href="/board1/list-9/1">물류관리</a>
+		  <%}%>
+		  
+		  <% if (menu == 10){%>
+          <a class="dropdown-item active" href="/board1/list-10/1">마감후이월</a>
+		  <%}else{%>
+		  <a class="dropdown-item" href="/board1/list-10/1">마감후이월</a>
+		  <%}%>
+		  
+		  <% if (menu == 11){%>
+          <a class="dropdown-item active" href="/board1/list-11/1">시스템</a>
+		  <%}else{%>
+		  <a class="dropdown-item" href="/board1/list-11/1">시스템</a>
+		  <%}%>
+		  
+		  <% if (menu == 12){%>
+          <a class="dropdown-item active" href="/board1/list-12/1">퇴직/사업/기타/보험</a>
+		  <%}else{%>
+		  <a class="dropdown-item" href="/board1/list-12/1">퇴직/사업/기타/보험</a>
+		  <%}%>
+		  
+		  <% if (menu == 13){%>
+          <a class="dropdown-item active" href="/board1/list-13/1">미분류</a>
+		  <%}else{%>
+		  <a class="dropdown-item" href="/board1/list-13/1">미분류</a>
+		  <%}%>
+        </div>
+  </li>
+  <li class="nav-item">
+  <% if (num == 1){%>
+    <a class="nav-link" href="/board1/list2/1">추가리스트</a>
+	<%}else{%>
+	<a class="nav-link active" href="/board1/list2/1">추가리스트</a>
+	<%}%>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/board1/log_list">대화이력</a>
+  </li>
+  <li class="nav-item"> 
+    <a class="nav-link disabled" href="#">Disabled</a>
+  </li>
+ <form class = "form-inline ml-auto" action="/board1/logout" method = "post">
+	<button class = "btn btn-success btn-sm" style = "border-color :#05728f ;background-color: #ffffff; color : #000000"type = "submit ">로그아웃</button>
+ </form>
+</ul>
+
+    <div class = "container" >             
+    <table class = "table table-bordered" style="width:100%">
+        <!--<colgroup>
+            <col width='8%' />
+            <col width='*%' />
+            <col width='15%' />
+            <col width='15%' />
+        </colgroup>-->
+        <thead class ="thead-dark">
+            <tr>
+                <th style="width : 50px;font-weight: 200; border-right: 1px solid #a7a9ab;">번호</th>
+				<th style="width : 160px;font-weight: 200;border-right: 1px solid #a7a9ab;">카테고리</th>
+                <th style = "font-weight: 200;border-right: 1px solid #a7a9ab;">제목</th>
+                <th style="width : 100px; font-weight: 200;">등록자</th>
+            </tr>
+        </thead>
+        <tbody>
+        <%
+             for(var i=no; i<no+page_size; i++) {
+				if (i == totalPageCount){
+					break;
+				}
+        %>
+            <tr>
+                <td style = "text-align: center"><%=i+1%></td>
+				<td style = "text-align: center"><%=rows[totalPageCount-1-i].Category%></td>
+				  <% if (30 < rows[totalPageCount-1-i].Title.length){%>
+					  <% if (num == 1){%>
+					<td style = "text-align: center"><a href='/board1/read?brdno=<%=rows[totalPageCount-1-i].BRDNO%>'><%=(rows[totalPageCount-1-i].Title).substr(0, 30)+"..." %></a></td>
+					  <%}else{%>
+					<td style = "text-align: center"><a href='/board1/read1?brdno=<%=rows[totalPageCount-1-i].BRDNO%>'><%=(rows[totalPageCount-1-i].Title).substr(0, 30)+"..." %></a></td>
+					  <%}%>
+					<%}else{%>
+						<% if (num == 1){%>
+					<td style = "text-align: center"><a href='/board1/read?brdno=<%=rows[totalPageCount-1-i].BRDNO%>'><%=rows[totalPageCount-1-i].Title%></a></td>
+					  <%}else{%>
+					<td style = "text-align: center"><a href='/board1/read1?brdno=<%=rows[totalPageCount-1-i].BRDNO%>'><%=rows[totalPageCount-1-i].Title%></a></td>
+					  <%}%>
+				  <%}%>
+                <td style = "text-align: center">admin</td>
+            </tr>
+        <%
+             }
+        %>
+        </tbody>
+    </table>
+	  <% if (num == 1){%>
+	<a class = "btn" style="float: right" href="/board1/form">글쓰기</a>
+	  <%}else{%>
+	<a class = "btn btn-dark " style="float: right" href="/board1/form1">글쓰기</a>
+	  <%}%>
+	<div class = "text-center">
+		<ul class = "pagination justify-content-center">
+			<%
+			if(curPage > 1){
+			%>
+			<li value=(curPage -1) class="page-item">
+				<a class = "page-link" href='../list-<%=menu%>/<%= 1 %>'>첫페이지</a>
+			</li>
+			<%
+			}else{
+			%>
+			<li value=(curPage -1) class="page-item disabled">
+				<a class = "page-link" href='#'>첫페이지</a>
+			</li>
+			<%
+			}
+			%>
+		
+			<%
+			if(startPage > 1){
+			%>
+			<li value=(curPage -1) class="page-item">
+				<a class = "page-link" href='../list-<%=menu%>/<%= startPage-1 %>'><</a>
+			</li>
+			<%
+			}else{
+			%>
+			<li value=(curPage -1) class="page-item disabled">
+				<a class = "page-link" href='#'><</a>
+			</li>
+			<%
+			}
+			%>
+			
+			
+			<%
+				for(var i = startPage; i <= endPage; i++){
+			
+				if(i == curPage){
+			%>
+			<li value=<%= i %> class = "page-item active "><a class = "page-link" href="../list-<%=menu%>/<%= i %>"><%= i %></a></li>
+			<%
+				}else{
+			%>
+
+			<li value=<%= i %> class='page-item ' >
+			<a class ="page-link" href='../list-<%=menu%>/<%= i %>'>
+			<%= i %>
+			</a>
+			</li>
+
+
+			<%
+			}if(i==totalPage)
+					break
+			%>
+
+			<%
+			}
+			%>
+			<%
+			if(endPage < totalPage){
+			%>
+			<li value=( curPage + 1) class="page-item">
+			<a class = "page-link" href='../list-<%=menu%>/<%= (endPage*1 + 1) %>'>></a>
+			</li>
+			<%
+			}else{
+			%>
+			<li value=(curPage -1) class="page-item disabled">
+			<a class = "page-link" href='#'>></a>
+			</li>
+			<%
+			}
+			%>
+			
+			<%
+			if(curPage < totalPage){
+			%>
+			<li value=( curPage + 1) class="page-item">
+			<a class = "page-link" href='../list-<%=menu%>/<%= totalPage %>'>끝페이지</a>
+			</li>
+			<%
+			}else{
+			%>
+			<li value=(curPage -1) class="page-item disabled">
+			<a class = "page-link" href='#'>끝페이지</a>
+			</li>
+			<%
+			}
+			%>
+
+
+		</ul>
+	</div>
+</div>
+</ul>
+</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</body>
+</html>

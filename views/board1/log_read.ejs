@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+ 
+<head>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>챗봇 관리페이지</title>
+<style>
+<%- include ./css/bootstrap.css%>
+img{ max-width:100%;}
+.inbox_people {
+  background: #f8f8f8 none repeat scroll 0 0;
+  float: left;
+  overflow: hidden;
+  width: 40%; border-right:1px solid #c4c4c4;
+}
+.inbox_msg {
+  border: 1px solid #c4c4c4;
+  clear: both;
+  overflow: hidden;
+}
+.top_spac{ margin: 20px 0 0;}
+
+
+.recent_heading {float: left; width:40%;}
+.srch_bar {
+  display: inline-block;
+  text-align: right;
+  width: 60%; padding:
+}
+.headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #c4c4c4;}
+
+.recent_heading h4 {
+  color: #05728f;
+  font-size: 21px;
+  margin: auto;
+}
+.srch_bar input{ border:1px solid #cdcdcd; border-width:0 0 1px 0; width:80%; padding:2px 0 4px 6px; background:none;}
+.srch_bar .input-group-addon button {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border: medium none;
+  padding: 0;
+  color: #707070;
+  font-size: 18px;
+}
+.srch_bar .input-group-addon { margin: 0 0 0 -27px;}
+
+.chat_ib h5{ font-size:15px; color:#464646; margin:0 0 8px 0;}
+.chat_ib h5 span{ font-size:13px; float:right;}
+.chat_ib p{ font-size:14px; color:#989898; margin:auto}
+.chat_img {
+  float: left;
+  width: 11%;
+}
+.chat_ib {
+  float: left;
+  padding: 0 0 0 15px;
+  width: 88%;
+}
+
+.chat_people{ overflow:hidden; clear:both;}
+.chat_list {
+  border-bottom: 1px solid #c4c4c4;
+  margin: 0;
+  padding: 18px 16px 10px;
+}
+.inbox_chat { height: 550px; overflow-y: scroll;}
+
+.active_chat{ background:#ebebeb;}
+
+.incoming_msg_img {
+  display: inline-block;
+  width: 6%;
+}
+.received_msg {
+  display: inline-block;
+  padding: 0 0 0 10px;
+  vertical-align: top;
+  width: 92%;
+ }
+ .received_withd_msg p {
+  background: #ebebeb none repeat scroll 0 0;
+  border-radius: 3px;
+  color: #646464;
+  font-size: 14px;
+  margin: 0;
+  padding: 5px 10px 5px 12px;
+  width: 100%;
+}
+.time_date {
+  color: #747474;
+  display: block;
+  font-size: 12px;
+  margin: 8px 0 0;
+}
+.received_withd_msg { width: 57%;}
+.mesgs {
+  float: left;
+  padding: 30px 15px 0 25px;
+  width: 60%;
+}
+
+ .sent_msg p {
+  background: #05728f none repeat scroll 0 0;
+  border-radius: 3px;
+  font-size: 14px;
+  margin: 0; color:#fff;
+  padding: 5px 10px 5px 12px;
+  width:100%;
+}
+.outgoing_msg{ overflow:hidden; margin:26px 15px 26px;}
+.sent_msg {
+  float: right;
+  width: 53%;
+}
+.input_msg_write input {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border: medium none;
+  color: #4c4c4c;
+  font-size: 15px;
+  min-height: 48px;
+  width: 100%;
+}
+
+.type_msg {border-top: 1px solid #c4c4c4;position: relative;}
+.msg_send_btn {
+  background: #05728f none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  font-size: 17px;
+  height: 33px;
+  position: absolute;
+  right: 0;
+  top: 11px;
+  width: 33px;
+}
+.messaging { padding: 0 0 50px 0;}
+.msg_history {
+  height: 516px;
+  overflow-y: auto;
+}
+</style>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+</head>
+<ul class="nav nav-tabs container">
+	<img src = "/images/image.png" style = "margin-left : 10px ;margin-right : 10px ;padding-bottom : 8px; padding-top :8px ;width : 120px ; height : 40px" alt = "logo"/>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="/board1">Q&A</a>
+	<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		  <a class="dropdown-item" href="/board1/list-0/1">전체</a>
+		  <a class="dropdown-item" href="/board1/list-1/1">전표/장부관리</a>
+		  <a class="dropdown-item" href="/board1/list-2/1">자동전표처리</a>
+		  <a class="dropdown-item" href="/board1/list-3/1">부가가치세</a>
+		  <a class="dropdown-item" href="#">결산/재무제표</a> 
+		  <a class="dropdown-item" href="#">원천징수/급여관리</a>
+		  <a class="dropdown-item" href="#">연말정산</a>
+		  <a class="dropdown-item" href="#">법인조정</a>		
+		  <a class="dropdown-item" href="#">개인조정</a>			
+		  <a class="dropdown-item" href="#">물류관리</a>
+		  <a class="dropdown-item" href="#">마감후이월</a>
+		  <a class="dropdown-item" href="#">시스템</a>
+		  <a class="dropdown-item" href="#">미분류</a>
+        </div>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./list2">추가리스트</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="#">대화이력</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#">Disabled</a>
+  </li>
+ <form class = "form-inline ml-auto" action="">
+	<button class = "btn btn-success btn-sm" style = "border-color :#05728f ;background-color: #ffffff; color : #000000" type = "submit ">로그아웃</button>
+ </form>
+</ul>
+
+ <div class="container" style="width:1000px;">
+
+<div class="messaging">
+      <div class="inbox_msg">
+        <div class="inbox_people" id = 'message_list'>
+          <div class="headind_srch" style="background-color:#05728f; border-left: 1px solid #05728f;">
+            <div class="recent_heading">
+              <h4 style="color:#ffffff;font-weight: 200;">Recent</h4>
+            </div>
+            <!--<div class="srch_bar">
+              <div class="stylish-input-group">
+                <input type="text" class="search-bar"  placeholder="Search" >
+                <span class="input-group-addon">
+                <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+                </span> </div>
+            </div>-->
+          </div>
+          <div class="inbox_chat">
+		  <%
+		  for (let i = 0; i < rows.length; i++){
+			%>
+			<%if(rows2[0] == null){%>
+				<div class="chat_list">
+			<%}else if(rows[i].Poster==rows2[0].Poster){%>
+            <div class="chat_list active_chat">
+			<%}else{%>
+			<div class="chat_list">
+			<%}%>
+              <div class="chat_people">
+                <div class="chat_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+               <a href='/board1/log_list?Poster=<%=rows[i].Poster%>'> <div class="chat_ib">
+                  <h5><%=rows[i].Poster%><span class="chat_date"></span></h5>
+                  <p>대화목록을 보시려면 클릭하십시오.</p>
+                </div></a>
+              </div>
+            </div>
+			<%
+			}
+			%>
+          </div>
+        </div>
+	
+        <div class="mesgs tab-pane show" id = 'test1' data-target="#message_list">
+          
+		  <div class="msg_history">
+		  <%
+		  for (let i = 0; i < rows2.length; i++){
+			%>
+            <div class="incoming_msg">
+              <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+              <div class="received_msg">
+                <div class="received_withd_msg">
+                  <p><%=rows2[i].Q_raw%></p>
+                  <span class="time_date"> <%=rows2[i].Date2%>    |    <%=rows2[i].Date%></span></div>
+              </div>
+            </div>
+            <div class="outgoing_msg">
+              <div class="sent_msg">
+                <p><%=rows2[i].Answer%></p>
+                <span class="time_date"> <%=rows2[i].Date2%>     |    <%=rows2[i].Date%></span> </div>
+            </div>
+			<%
+			}
+			%>
+        </div>
+      </div>
+      
+    </div>
+	</div>
+	
+				<script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script>
+				<script type="text/javascript">
+				$('#test').click(function(e) {
+				$(this).toggle();
+				});</script>
+				
+				
+	<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js"></script>
+</body>
+
+</html>
