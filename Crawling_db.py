@@ -7,7 +7,7 @@ import time
 import pymysql
 
 last_page = 0
-url = "http://help.douzone.com/pboard/index.jsp?code=qna10&pid=10&type=all&page="
+url = ""
 start_time = time.time()
 html = urlopen(url)
 bsObject = BeautifulSoup(html,"html.parser")
