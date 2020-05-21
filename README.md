@@ -25,7 +25,7 @@
 <img width="292” alt="챗봇실행화면2" src="https://user-images.githubusercontent.com/28583618/82534212-bb13a480-9b7f-11ea-9082-93f8c3704be9.png">
 </div>
 2. 챗봇 관리 페이지
-![챗봇 관리페이지 1](https://user-images.githubusercontent.com/28583618/82535018-2dd14f80-9b81-11ea-9569-6ed926d3f156.png)
+<img width="843" alt="챗봇관리페이지" src="https://user-images.githubusercontent.com/28583618/82535244-902a5000-9b81-11ea-810b-8d56fdbc75b4.png">
 
 ## 성과 및 기대효과
 1. 성과 및 기대효과
