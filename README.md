@@ -1,7 +1,7 @@
 # 문장 유사도 분석을 이용한 고객대응 챗봇
 ## 팀원
-         - 권연욱,  전인엽
-
+         - 권연욱, 전인엽
+ 
 ## 목적 및 배경
 1. 목적
 	 - 고객 문의 사항에 효율적으로 대응 가능한 챗봇을 개발하여 기업의 운용비용 절감
@@ -19,10 +19,13 @@
 	- Mysql로 구축한 데이터베이스에 분석한 데이터를 저장해 챗봇과 관리 페이지에서 동시 접근이 가능하다.
 
 ## 결과
+1. 챗봇 실행 화면
 <div>
 <img width="292" alt="챗봇실행화면1" src="https://user-images.githubusercontent.com/28583618/82534144-9c151280-9b7f-11ea-8637-b843797e9f16.png">
 <img width="292” alt="챗봇실행화면2" src="https://user-images.githubusercontent.com/28583618/82534212-bb13a480-9b7f-11ea-9082-93f8c3704be9.png">
 </div>
+2. 챗봇 관리 페이지
+![챗봇 관리페이지 1](https://user-images.githubusercontent.com/28583618/82534855-dd59f200-9b80-11ea-912b-6fa700cf4974.png)
 
 ## 성과 및 기대효과
 1. 성과 및 기대효과
