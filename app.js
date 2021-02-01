@@ -1,5 +1,5 @@
 'use strict';
-const PAGE_ACCESS_TOKEN = "EAAR6yzgZBNCcBAIp8kvUfHdGqumB1j8mzJkTuPxjDwXfv5ChtsD5ZB1sZBfcfyPs0WwthslEhQDhloBNaZA4zSC28ZCuDtp8XKKFZBKWP86gYSVYUtBc4ZBPRBZAdiSHdzCCx9RanrC4v15C31pb5sEppFZBZBPVWD105ObsEEKs7uWei0FZCFnXuRp";
+const PAGE_ACCESS_TOKEN = process.env.ACCESSTOKEN;
 const ps = require('python-shell');
 var Mecab = require('/home/ec2-user/mecab-mod.js');
 var mecab = new Mecab();
