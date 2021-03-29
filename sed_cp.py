@@ -1,6 +1,8 @@
 import pymysql
+import os
 
-db = pymysql.connect(host = 'localhost', user='root', passwd='dlsduqdl', db='capstone', charset='utf8')
+password = os.environ['DB_PWD']
+db = pymysql.connect(host = 'localhost', user='root', passwd=password, db='capstone', charset='utf8')
 cursor = db.cursor()
 
 query = 'select Q_noun, BRDNO from QnA;'
