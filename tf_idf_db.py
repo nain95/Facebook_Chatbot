@@ -1,12 +1,14 @@
 import math
 import re
 import sys
+import os
 import logging
 import pymysql
 from konlpy.tag import Mecab
 
 logging.basicConfig(filename = './tete.log',level=logging.DEBUG)
-db = pymysql.connect(host = 'localhost', user='root', passwd='dlsduqdl', db='capstone')
+password = os.environ['DB_PWD']
+db = pymysql.connect(host = 'localhost', user='root', passwd=password, db='capstone')
 cursor = db.cursor()
 
 class TF_IDF:
