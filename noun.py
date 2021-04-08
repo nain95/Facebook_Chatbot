@@ -6,7 +6,7 @@ class Noun:
 		self.b = ""
 	
 	def printNoun(self, file):
-		m = Mecab()
+		m = Mecab('/tmp/mecab-ko-dic-2.1.1-20180720')
 		for line in file:
 			line = line.replace('\n','')
 			word = line.split(" ")

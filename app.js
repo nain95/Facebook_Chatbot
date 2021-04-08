@@ -1,20 +1,20 @@
 'use strict';
 const PAGE_ACCESS_TOKEN = process.env.ACCESSTOKEN;
 const ps = require('python-shell');
-var Mecab = require('/home/ec2-user/mecab-mod.js');
+var Mecab = require('/home/ec2-user/Facebook_Chatbot/mecab-mod.js');
 var mecab = new Mecab();
 var tmpquery = "";
 var fs = require('fs');
 var options = {
 	mode: 'text',
-	pythonPath: '/usr/bin/python3.6',
+	pythonPath: '/bin/python3',
 	pythonOpthons: ['-u'],
 	scriptPath: '',
 	args: [],
 };
 const option = {
-   key: fs.readFileSync('/etc/letsencrypt/live/nain95.tk/privkey.pem'),
-   cert: fs.readFileSync('/etc/letsencrypt/live/nain95.tk/cert.pem'),
+   key: fs.readFileSync('/etc/letsencrypt/live/ijeonbot.tk/privkey.pem'),
+   cert: fs.readFileSync('/etc/letsencrypt/live/ijeonbot.tk/cert.pem'),
    agent: false
 };
 
@@ -37,12 +37,12 @@ var pool = mysql.createPool({
     host     :'localhost',
     user     :'root',
     password :'dlsduqdl',
-    database :'capstone'   
+    database :'chatbot'   
 }); 
 //var mysqlRouter = require('./routes/mysql');
 	
 // Sets server port and logs message on success
-app.listen(3000, () => console.log('webhook is listening'));
+//app.listen(3000, () => console.log('webhook is listening'));
 https.createServer(option,app).listen(443);
 //http.createServer(option,app).listen(80);
 //router.get('/', function(req, res) { res.render(mysqlRouter); });
@@ -57,6 +57,7 @@ app.get('/',function(req, res, next) {
 // Accepts POST requests at /webhook endpoint
 
 app.post('/webhook', (req, res) => {
+	
 
     // Parse the request body from the POST
     let body = req.body;
@@ -109,7 +110,7 @@ app.post('/webhook', (req, res) => {
 
 // Accepts GET requests at the /webhook endpoint
 app.get('/webhook', (req, res) => {
-    console.log(req.query['hub.verify_token'])
+	console.log(req.query['hub.verify_token'])
     if (req.query['hub.verify_token'] === 'chat'){
         //return res.send(req.query['hub.challenge'])
 		res.status(200).send(req.query['hub.challenge']);

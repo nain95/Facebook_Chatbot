@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 var fs = require('fs');
-var Mecab = require('/home/ec2-user/mecab-mod.js');
+var Mecab = require('/home/ec2-user/Facebook_Chatbot/mecab-mod.js');
 var mecab = new Mecab();
 
 router.use(express.static(__dirname + '/public'));
@@ -15,11 +15,13 @@ var pool = mysql.createPool({
     host     :'localhost',
     user     :'root',
     password :'dlsduqdl',
-    database :'capstone'   
+    database :'chatbot'   
 }); 
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const path = require('path');
+const shell = require('shelljs')
+
 router.use('/node_modules',express.static(path.join(__dirname,'/node_modules')));
 router.use(session({
   secret: 'keyboard cat',
@@ -1221,7 +1223,7 @@ router.post('/save',function(req,res,next){
             sql ="UPDATE QnA" +
                        " SET Category=?, Title=?, Q_raw=?, Q_noun =?, Answer=?" +
                   " WHERE BRDNO=?";
-        }else {
+	}else {
             sql ="INSERT INTO QnA(Category, Title, Q_raw,Q_noun, answer) VALUES(?,?,?,?,?)";
         }
         connection.query(sql, data,function (err, rows) {
@@ -1229,6 +1231,14 @@ router.post('/save',function(req,res,next){
  
             res.redirect('/board1/');
             connection.release();
+        	if(shell.exec('python3 sed_cp.py > sed.txt').code !== 0) {
+  			shell.echo('Error: command failed')
+  			shell.exit(1)
+		}
+        	if(shell.exec('awk -f script.awk sed.txt > awkData.txt').code !== 0) {
+  			shell.echo('Error: command failed')
+  			shell.exit(1)
+		}
         });
     });
 });
@@ -1256,10 +1266,18 @@ router.post('/save1',function(req,res,next){
 	 
 				res.redirect('/board1/list2/1');
 				connection.release();
+        			if(shell.exec('python3 sed_cp.py > sed.txt').code !== 0) {
+  					shell.echo('Error: command failed')
+  					shell.exit(1)
+				}
+        			if(shell.exec('awk -f script.awk sed.txt > awkData.txt').code !== 0) {
+  					shell.echo('Error: command failed')
+  					shell.exit(1)
+				}
 			});
 		});
+	});
     });
-});
  
 router.get('/delete',function(req,res,next){
     pool.getConnection(function (err, connection) {
@@ -1270,6 +1288,14 @@ router.get('/delete',function(req,res,next){
  
             res.redirect('/board1/');
             connection.release();
+        if(shell.exec('python3 sed_cp.py > sed.txt').code !== 0) {
+  		shell.echo('Error: command failed')
+  		shell.exit(1)
+	}
+        if(shell.exec('awk -f script.awk sed.txt > awkData.txt').code !== 0) {
+  		shell.echo('Error: command failed')
+  		shell.exit(1)
+	}
         });
     });
 });
@@ -1283,11 +1309,19 @@ router.get('/delete1',function(req,res,next){
  
             res.redirect('/board1/list2');
             connection.release();
+        	if(shell.exec('python3 sed_cp.py > sed.txt').code !== 0) {
+  			shell.echo('Error: command failed')
+  			shell.exit(1)
+		}
+        	if(shell.exec('awk -f script.awk sed.txt > awkData.txt').code !== 0) {
+  			shell.echo('Error: command failed')
+  			shell.exit(1)
+		}
         });
     });
 });
 
-router.get('/imgs',function(req,res){
+router.get('/images' ,function(req,res){
 
 	fs.readFile('image.png' ,function(error, data){
 		res.writeHead(200,{'Content-Type' : 'image/png'});

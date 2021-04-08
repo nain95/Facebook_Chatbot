@@ -4,11 +4,12 @@ import sys
 import os
 import logging
 import pymysql
+import ssl
 from konlpy.tag import Mecab
 
 logging.basicConfig(filename = './tete.log',level=logging.DEBUG)
 password = os.environ['DB_PWD']
-db = pymysql.connect(host = 'localhost', user='root', passwd=password, db='capstone')
+db = pymysql.connect(host = 'localhost', user='root', passwd=password, db='chatbot')
 cursor = db.cursor()
 
 class TF_IDF:
@@ -56,31 +57,30 @@ class TF_IDF:
 				return score_lst
 
 		def print_sorted_tfidf(self, sent):
-				temp = []
-				result_sentence = ""
-				m = Mecab()
-				sentence = ""		#들어온 query 형태소 분석후 넣을곳
-				for word in sent.split():
-					tag = m.pos(word)
-					for tuple in tag:
-						if tuple[1] == 'NNG' or tuple[1] == 'NNP':
-							sentence+=tuple[0]+" "
-				sc_lst = self.calc_sent_tfidf(sentence)
-				sc_lst = sorted(sc_lst.items(), key=(lambda x:x[1]), reverse=True)
-				if sc_lst == [] or sc_lst[0][1] < 14:
-					return("일치하는 질문을 찾지못했습니다.")
-				
-				else:
-					for doc, score in sc_lst[:1]:
-						sql = 'select Answer from QnA where BRDNO=%s;'
-						cursor.execute(sql, (doc))
-						select_result = cursor.fetchall()
-						if select_result != ():
-							return select_result[0][0]
+                                temp = []
+                                result_sentence = ""
+                                m = Mecab('/tmp/mecab-ko-dic-2.1.1-20180720')
+                                sentence = ""                                       #들어온 query 형태소 분석후 넣을곳
+                                for word in sent.split():
+                                    tag = m.pos(word)
+                                    for tuple in tag:
+                                        if tuple[1] == 'NNG' or tuple[1] == 'NNP':
+                                            sentence+=tuple[0]+" "
+                                sc_lst = self.calc_sent_tfidf(sentence)
+                                sc_lst = sorted(sc_lst.items(), key=(lambda x:x[1]), reverse=True)
+                                if sc_lst == [] or sc_lst[0][1] < 10:
+                                    return("일치하는 질문을 찾지못했습니다.")
+                                else:
+                                    for doc, score in sc_lst[:1]:
+                                        sql = 'select Answer from QnA where BRDNO=%s;'
+                                        cursor.execute(sql, (doc))
+                                        select_result = cursor.fetchall()
+                                        if select_result != ():
+                                            return select_result[0][0]
 
 if __name__ == "__main__":
-		score = TF_IDF("./awkData.txt")
-		query = sys.argv[1:]
-		a = score.print_sorted_tfidf(query[0])
-		print(a)
-		db.close()
+        score = TF_IDF("./awkData.txt")
+        query = sys.argv[1:]
+        a = score.print_sorted_tfidf(query[0])
+        print(a)
+        db.close()
