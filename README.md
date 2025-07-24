@@ -1,38 +1,34 @@
-# 문장 유사도 분석을 이용한 고객대응 챗봇
-## 팀원
+# Customer Service Chatbot Using Text Similarity Analysis
+## Team Members
          - 권연욱, 전인엽
  
-## 목적 및 배경
-1. 목적
-	 - 고객 문의 사항에 효율적으로 대응 가능한 챗봇을 개발하여 기업의 운용비용 절감
-	 - 24시간 대응가능하여 고객의 편의성 증대
-	 - 관리 페이지 개발로 챗봇 운영 및 관리 편리 (
+## Purpose and Background
+1. Purpose
+	 - Develop a chatbot capable of efficiently responding to customer inquiries to reduce operational costs for businesses
+	 - Increase customer convenience through 24/7 availability
+	 - Convenient chatbot operation and management through admin page development
 
-2. 배경
-	- 고객센터에 누적된 데이터를 살펴보면 중복된 질문에 같은 답변을 반복하는 경우가 많이 발생한다. 문장 유사도를 분석할 수 있는 TF-IDF 유사도 분석을 이용하여 근삿값이 가장 높은 질문의 답변을 회신해주는 챗봇을 고안하였다.
+2. Background
+	- When examining accumulated data from customer service centers, there are many cases where the same answers are repeatedly given to duplicate questions. We designed a chatbot that uses TF-IDF similarity analysis to analyze sentence similarity and responds with answers from questions with the highest approximation values.
 
-## 설명
-1. 설명
-	- 챗봇과 관리 페이지의 서버는 AWS의 EC2 인스턴스를 사용하였다.
-	- 페이스북 메신저 API와 Webhook 기능을 이용해 사용자의 질문을 입력받고, 답변을 전송하는 기능을한다.
-	- Python으로 더존 비즈온의 고객센터 웹페이지를 크롤링하여 자료를 수집했고,TF-IDF 분석의 정확도를 높이기 위해 형태소 분석으로 질문데이터에서 명사만을 추출해 문장 유사도 분석을 한다.
-	- Mysql로 구축한 데이터베이스에 분석한 데이터를 저장해 챗봇과 관리 페이지에서 동시 접근이 가능하다.
+## Description
+1. Description
+	- The chatbot and admin page servers use AWS EC2 instances.
+	- Facebook Messenger API and Webhook functionality are used to receive user questions and send responses.
+	- Data was collected by crawling Douzone Bizon's customer service web pages using Python, and to improve TF-IDF analysis accuracy, morphological analysis was performed to extract only nouns from question data for sentence similarity analysis.
+	- The analyzed data is stored in a MySQL database, enabling simultaneous access from both the chatbot and admin page.
 
-## 결과
-1. 챗봇 실행 화면
+## Results
+1. Chatbot Execution Screen
 <div>
 <img width="292" alt="챗봇실행화면1" src="https://user-images.githubusercontent.com/28583618/82534144-9c151280-9b7f-11ea-8637-b843797e9f16.png">
-<img width="292” alt="챗봇실행화면2" src="https://user-images.githubusercontent.com/28583618/82534212-bb13a480-9b7f-11ea-9082-93f8c3704be9.png">
+<img width="292" alt="챗봇실행화면2" src="https://user-images.githubusercontent.com/28583618/82534212-bb13a480-9b7f-11ea-9082-93f8c3704be9.png">
 </div>
-2. 챗봇 관리 페이지
+2. Chatbot Admin Page
 <img width="843" alt="챗봇관리페이지" src="https://user-images.githubusercontent.com/28583618/82535244-902a5000-9b81-11ea-810b-8d56fdbc75b4.png">
 
-## 성과 및 기대효과
-1. 성과 및 기대효과
-	- 비슷한 질문에 대해서는 챗봇에서 답변이 가능하기에 기업의 소요 비용 감소
- 	- 챗봇의 사용자가 늘어날수록 분석이 가능한 데이터가 증가하여 성능 증가 기대
- 	- 챗봇 지원용 플러그인을 이용하여 기업 페이지 내에 챗봇 삽입하여 접근 편의성 증대
-
-
-
-#github
+## Achievements and Expected Effects
+1. Achievements and Expected Effects
+	- Reduced operational costs for businesses as the chatbot can respond to similar questions
+ 	- Expected performance improvement as the amount of analyzable data increases with growing chatbot usage
+ 	- Enhanced accessibility by inserting chatbots into corporate pages using chatbot support plugins
