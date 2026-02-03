@@ -8,7 +8,7 @@
     "async": "^3.0.1",
     "body-parser": "^1.19.0",
     "cheerio-httpcli": "^0.7.4",
-    "css-loader": "^3.2.0",
+    "css-loader": "^6.7.3",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
     "express-session": "^1.16.2",
